@@ -1,0 +1,31 @@
+title: Flutter Boilerplate
+version: "Versiyon: {}"
+base_url_empty: Servis adresi tanımlı değil! Lütfen ayarlardan ortam verisini seçin.
+
+widget:
+  choose: Seçiniz...
+  warning: Uyarı
+
+settings:
+  title: Ayarlar
+  common: Genel
+  language: Dil
+  environment:
+    title: Ortam
+    prod: Canlı
+    test: Test
+  display:
+    title: Görünüm
+    theme_mode: Tema Modu
+    system: Sistem Varsayılanı
+    light: Aydınlık Mod
+    dark: Karanlık Mod
+
+login:
+  username: Kullanıcı Adı
+  password: Parola
+  login: GİRİŞ YAP
+  reset_password: Şifremi Unuttum?
+  username_empty: Kullanıcı adınızı girin!
+  password_empty: Parolanızı girin!
+  logging: Giriş yapılıyor...
