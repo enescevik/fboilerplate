@@ -44,9 +44,9 @@ class BaseApi {
     }
 
     var result = json.decode(response.body);
-    if (result['IsFailure'] as bool) {
-      log.e(result['Error']);
-      throw Exception(result['Error']);
+    if (result['isFailure'] as bool) {
+      log.e(result['error']);
+      throw Exception(result['error']);
     }
 
     log.d(result);
@@ -67,7 +67,7 @@ class BaseApi {
   Future<R> getData<R extends BaseModel>(String url, [R model]) async {
     try {
       return _httpGet(url).then((res) =>
-          res['Value'] == null ? null : model?.fromJson(res['Value']) as R);
+          res['value'] == null ? null : model?.fromJson(res['value']) as R);
     } catch (e) {
       await _dialog.showDialog(
         title: 'widget.warning'.tr(),
@@ -81,7 +81,7 @@ class BaseApi {
   Future<List<R>> getList<R extends BaseModel>(String url, [R model]) async {
     try {
       return await _httpGet(url).then((res) =>
-          List.from(res['Value']).map((e) => model.fromJson(e) as R).toList());
+          List.from(res['value']).map((e) => model.fromJson(e) as R).toList());
     } catch (e) {
       await _dialog.showDialog(
         title: 'widget.warning'.tr(),
@@ -123,7 +123,7 @@ class BaseApi {
       String url, B body, R model) async {
     try {
       return _httpPost(url, body).then((res) =>
-          List.from(res['Value']).map((e) => model.fromJson(e) as R).toList());
+          List.from(res['value']).map((e) => model.fromJson(e) as R).toList());
     } catch (e) {
       await _dialog.showDialog(
         title: 'widget.warning'.tr(),

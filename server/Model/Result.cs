@@ -2,7 +2,7 @@
 {
     public class Result
     {
-        public bool IsFailure => string.IsNullOrWhiteSpace(Error);
+        public bool IsFailure => !string.IsNullOrWhiteSpace(Error);
         public bool IsSuccess => !IsFailure;
         public string Error { get; private set; }
 

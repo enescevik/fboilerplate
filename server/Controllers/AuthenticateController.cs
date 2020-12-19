@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace server.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AuthenticateController : ControllerBase
     {
         private readonly IAuthenticationService _authenticationService;
@@ -16,9 +16,9 @@ namespace server.Controllers
             _authenticationService = authenticationService;
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("login")]
-        public async Task<IActionResult> Login([FromBody] LoginRequest request)
+        public async Task<IActionResult> Login([FromQuery] LoginRequest request)
         {
             var result = await _authenticationService.Login(request);
             return Ok(result);
