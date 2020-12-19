@@ -1,11 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:easy_localization/easy_localization.dart';
 import 'package:fboilerplate/apis/models/base_model.dart';
 import 'package:fboilerplate/app/locator.dart';
 import 'package:fboilerplate/services/shared_preferences_service.dart';
 import 'package:http/http.dart';
+import 'package:http/io_client.dart';
 import 'package:logger/logger.dart';
 import 'package:stacked_services/stacked_services.dart';
 
@@ -51,8 +53,13 @@ class BaseApi {
     return result;
   }
 
+  final httpClient = new HttpClient()
+    ..badCertificateCallback =
+        (X509Certificate cert, String host, int port) => true;
+
   Future _httpGet(String url) async {
-    return get(_url(url), headers: _headers())
+    return new IOClient(httpClient)
+        .get(_url(url), headers: _headers())
         .then((res) => _checkResult(res))
         .timeout(const Duration(seconds: 5));
   }
@@ -93,7 +100,8 @@ class BaseApi {
     final data = jsonEncode(jsonBody);
     log.d(data);
 
-    return post(_url(url), body: data, headers: _headers())
+    return new IOClient(httpClient)
+        .post(_url(url), body: data, headers: _headers())
         .then((res) => _checkResult(res))
         .timeout(const Duration(seconds: 5));
   }
